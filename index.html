@@ -475,6 +475,23 @@
                 models: "Demonstrated seamless integration into existing Transformer architectures, either during or after pretraining. Showed significant improvements in model performance for long contexts, better key information retrieval, and enhanced length generalization across multiple model architectures.",
                 paperUrl: "https://arxiv.org/abs/2501.19399"
             },
+            ,
+            {
+                date: "Jan 2025",
+                title: "DeepSeek R1",
+                authors: "DeepSeek AI",
+                context: "Released with a 128K token context window. Utilized an innovative Mixture-of-Experts (MoE) architecture that activates only relevant parameters when processing long contexts, making it particularly efficient.",
+                models: "Demonstrated efficient technical performance for coding and mathematical tasks requiring long context. Its sparse parameter activation approach provided an alternative to the attention-optimization approaches used by competitors, showing multiple architectural paths to improving long-context performance.",
+                paperUrl: "https://arxiv.org/html/2501.12948v1"
+            },
+            {
+                date: "Feb 2025",
+                title: "Long Contexts in the Wild",
+                authors: "Zhang et al.",
+                context: "Investigated real-world long-context usage. Found that most long-context tasks are not just about length, but also about the type of information being processed. Proposed a new benchmark for evaluating LLMs on real-world long-context tasks.",
+                models: "Tested LLaMA-3 (8B/70B), Qwen-2 (7B), and Mistral-7B (32K context). Found that while all models performed well on synthetic benchmarks, they struggled with real-world tasks that required understanding complex relationships across long contexts.",
+                paperUrl: "https://arxiv.org/abs/2501.19399"
+            },
             {
                 date: "Feb 2025",
                 title: "Don't Do RAG",
@@ -514,15 +531,9 @@
                 context: "Released with up to 200K token context window. Introduced 'extended thinking mode' to improve reasoning quality within the large context window, allowing Claude to better process and reason over large amounts of information.",
                 models: "Achieved 70.3% on SWE-Bench Verified in extended thinking mode. Particularly excelled in coding tasks and complex problem-solving requiring deep reasoning over extensive context. Demonstrated the power of specialized inference techniques for improving model performance even without expanding to the million-token range.",
                 paperUrl: "https://blog.getbind.co/2025/03/26/gemini-2-5-pro-vs-claude-3-7-sonnet-vs-deepseek-r1-which-model-is-the-best-for-coding/"
-            },
-            {
-                date: "Mar 2025",
-                title: "DeepSeek R1",
-                authors: "DeepSeek AI",
-                context: "Released with a 128K token context window. Utilized an innovative Mixture-of-Experts (MoE) architecture that activates only relevant parameters when processing long contexts, making it particularly efficient.",
-                models: "Demonstrated efficient technical performance for coding and mathematical tasks requiring long context. Its sparse parameter activation approach provided an alternative to the attention-optimization approaches used by competitors, showing multiple architectural paths to improving long-context performance.",
-                paperUrl: "https://arxiv.org/html/2501.12948v1"
             }
+
+
         ];
 
         // Populate the timeline
