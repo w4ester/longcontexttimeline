@@ -444,14 +444,38 @@
                 paperUrl: "https://arxiv.org/abs/2307.03172"
             },
             {
-                date: "Oct 2024",
-                title: "Infinite Retrieval",
-                authors: "Ye et al.",
-                context: "Introduced InfiniRetri, enabling LLMs to handle >1M token inputs by using their own attention as a retrieval mechanism. Demonstrated 100% accuracy on a 1M-token \"needle in haystack\" test with a model originally limited to 32K.",
-                models: "Used Qwen2.5 (0.5B params) and Mistral-7B with 32K context, extending them to read 1M+ tokens with no retraining. InfiniRetri worked across LLaMA-3, Qwen, Mistral, showing it's model-agnostic and dramatically improves long-context retrieval.",
-                paperUrl: "https://arxiv.org/abs/2502.12962"
+                date: "Jan 2024",
+                title: "Prompt-RAG: Pioneering Vector Embedding-Free Retrieval-Augmented Generation in Niche Domains, Exemplified by Korean Medicine",
+                authors: "Kang et al.",
+                context: "Prompt-RAG, distinct from conventional RAG models, operates without the need for embedding vectors. Its performance was assessed through a Question-Answering (QA) chatbot application, where responses were evaluated for relevance, readability, and informativeness. The results showed that Prompt-RAG outperformed existing models, including ChatGPT and conventional vector embedding-based RAGs, in terms of relevance and informativeness. Despite challenges like content structuring and response latency, the advancements in LLMs are expected to encourage the use of Prompt-RAG, making it a promising tool for other domains in need of RAG methods.",
+                models: "Used a GPT-4-0613 for the heading selection and GPT-3.5-turbo-16k-0613 for answering generation.",
+                paperUrl: "https://arxiv.org/abs/2401.11246"
             },
             {
+                date: "March 2024",
+                title: "Found in the Middle: How Language Models Use Long Contexts Better via Plug-and-Play Positional Encoding",
+                authors: "Zhenyu Zhang, Runjin Chen, Shiwei Liu, Zhewei Yao, Olatunji Ruwase, Beidi Chen, Xiaoxia Wu, Zhangyang Wang",
+                context: "Introduced Multi-scale Positional Encoding (Ms-PoE) to mitigate the 'lost-in-the-middle' challenge in large language models, enhancing model performance for retrieving relevant information from the middle of extended contexts without additional fine-tuning.",
+                models: "Evaluated on various LLMs, demonstrating notable improvements including an average accuracy gain of up to 3.8 on the Zero-SCROLLS benchmark compared to original models.",
+                paperUrl: "https://arxiv.org/abs/2403.04797"
+            },
+            {
+                date: "May 2024",
+                title: "Beyond the Limits: A Survey of Techniques to Extend the Context Length in Large Language Models",
+                authors: "Wang et al.",
+                context: "Reviewed techniques to extend LLM context windows, categorizing approaches like positional extrapolation, prompt compression, and attention approximation. Highlighted remaining computational challenges and future directions.",
+                models: "Surveyed numerous models and techniques including RoPE, ALiBi, sparse attention, quantization, multi-query attention, and memory management methods.",
+                paperUrl: "https://arxiv.org/abs/2402.02244"
+            },
+            {   
+                date: "June 2024",
+                title: "Gemini 1.5 Pro 2M context window, code execution capabilities, and Gemma 2 are available",
+                authors: "Logan Kilpatrick, Shrestha Basu Mallick, Ronen Kofman",
+                context: "Gemini 1.5 Pro with 2 million token context, context caching, integrated code execution, and the release of Gemma 2, an open-weight language model.",
+                models: "Gemini 1.5 Pro (2M context), Gemma 2; emphasized advanced functionality for processing extensive input sequences and executing integrated code snippets.",
+                paperUrl: "https://developers.googleblog.com/en/new-features-for-the-gemini-api-and-google-ai-studio/"
+            },
+           {
                 date: "Dec 2024",
                 title: "Refusal Direction",
                 authors: "Arditi et al.",
@@ -475,7 +499,7 @@
                 models: "Demonstrated seamless integration into existing Transformer architectures, either during or after pretraining. Showed significant improvements in model performance for long contexts, better key information retrieval, and enhanced length generalization across multiple model architectures.",
                 paperUrl: "https://arxiv.org/abs/2501.19399"
             },
-            ,
+            
             {
                 date: "Jan 2025",
                 title: "DeepSeek R1",
@@ -483,14 +507,6 @@
                 context: "Released with a 128K token context window. Utilized an innovative Mixture-of-Experts (MoE) architecture that activates only relevant parameters when processing long contexts, making it particularly efficient.",
                 models: "Demonstrated efficient technical performance for coding and mathematical tasks requiring long context. Its sparse parameter activation approach provided an alternative to the attention-optimization approaches used by competitors, showing multiple architectural paths to improving long-context performance.",
                 paperUrl: "https://arxiv.org/html/2501.12948v1"
-            },
-            {
-                date: "Feb 2025",
-                title: "Long Contexts in the Wild",
-                authors: "Zhang et al.",
-                context: "Investigated real-world long-context usage. Found that most long-context tasks are not just about length, but also about the type of information being processed. Proposed a new benchmark for evaluating LLMs on real-world long-context tasks.",
-                models: "Tested LLaMA-3 (8B/70B), Qwen-2 (7B), and Mistral-7B (32K context). Found that while all models performed well on synthetic benchmarks, they struggled with real-world tasks that required understanding complex relationships across long contexts.",
-                paperUrl: "https://arxiv.org/abs/2501.19399"
             },
             {
                 date: "Feb 2025",
@@ -508,14 +524,7 @@
                 models: "Tested GPT-4-Turbo, Mistral-7B (32K context), LLaMA-3 8B, Qwen-2 (7B), and Phi-3 7B (128K context). After fine-tuning (e.g. a retrieve-then-generate training), a Mistral-7B-32K model gained +15% and even outperformed GPT-4-Turbo on the benchmark. Shows small, tuned models can excel in long-context reasoning.",
                 paperUrl: "https://arxiv.org/abs/2501.08248"
             },
-            {
-                date: "Feb 2025",
-                title: "Prompted RAG",
-                authors: "Park et al.",
-                context: "Tackled extremely long inputs (up to 100K tokens). Showed that simply having a 100K context isn't enough for multi-hop QA – models need guidance. Proposed a single-prompt strategy where the model tags relevant info and then reasons step-by-step, mimicking a retrieve-and-read process within the prompt. This significantly improved accuracy on tasks with massive distractor text (BABILong benchmark).",
-                models: "Used a proxy \"GPT-4-mini\" (simulated 128K context model) and LLaMA-3.1-8B (32K). Across 16K, 32K, 64K contexts, their method outperformed both a no-retrieval baseline and a traditional RAG pipeline. Indicates that even with GPT-4 or Claude-level models, proper prompt engineering (in-context retrieval + chain-of-thought) is key to leveraging very long contexts.",
-                paperUrl: "#"
-            },
+
             {
                 date: "Mar 2025",
                 title: "Gemini 2.5 Pro",
