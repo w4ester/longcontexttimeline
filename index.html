@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Research Timeline (2023-2025)</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #4b5563;
+            --accent-color: #10b981;
+            --background-color: #f9fafb;
+            --card-background: #ffffff;
+            --text-color: #1f2937;
+            --border-color: #e5e7eb;
+            --hover-color: #f3f4f6;
+            --timeline-width: 4px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --primary-color: #3b82f6;
+                --secondary-color: #9ca3af;
+                --accent-color: #10b981;
+                --background-color: #1f2937;
+                --card-background: #374151;
+                --text-color: #f3f4f6;
+                --border-color: #4b5563;
+                --hover-color: #2d3748;
+            }
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background-color: var(--background-color);
+            margin: 0;
+            padding: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: var(--secondary-color);
+            margin-bottom: 20px;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 30px;
+        }
+
+        .theme-toggle {
+            background: var(--card-background);
+            border: 1px solid var(--border-color);
+            color: var(--text-color);
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .theme-toggle:hover {
+            background: var(--hover-color);
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .timeline::after {
+            content: '';
+            position: absolute;
+            width: var(--timeline-width);
+            background-color: var(--border-color);
+            top: 0;
+            bottom: 0;
+            left: 50%;
+            margin-left: calc(var(--timeline-width) / -2);
+            border-radius: 2px;
+        }
+
+        .timeline-item {
+            position: relative;
+            width: 50%;
+            margin-bottom: 30px;
+        }
+
+        .timeline-item:nth-child(odd) {
+            left: 0;
+            padding-right: 40px;
+        }
+
+        .timeline-item:nth-child(even) {
+            left: 50%;
+            padding-left: 40px;
+        }
+
+        .timeline-item::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: var(--accent-color);
+            border: 4px solid var(--card-background);
+            border-radius: 50%;
+            top: 15px;
+            z-index: 1;
+        }
+
+        .timeline-item:nth-child(odd)::after {
+            right: -13px;
+        }
+
+        .timeline-item:nth-child(even)::after {
+            left: -13px;
+        }
+
+        .timeline-content {
+            padding: 20px;
+            background-color: var(--card-background);
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .timeline-content:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin-bottom: 12px;
+            font-size: 0.9rem;
+        }
+
+        .timeline-title {
+            font-size: 1.3rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: var(--primary-color);
+        }
+
+        .timeline-authors {
+            font-style: italic;
+            color: var(--secondary-color);
+            margin-bottom: 10px;
+            font-size: 0.9rem;
+        }
+
+        .timeline-detail {
+            position: fixed;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .timeline-detail.active {
+            opacity: 1;
+            pointer-events: all;
+        }
+
+        .detail-card {
+            background-color: var(--card-background);
+            border-radius: 10px;
+            max-width: 800px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            padding: 25px;
+            position: relative;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            cursor: pointer;
+        }
+
+        .detail-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+
+        .detail-date {
+            font-size: 1rem;
+            color: var(--secondary-color);
+            margin-bottom: 15px;
+        }
+
+        .detail-section {
+            margin-bottom: 15px;
+        }
+
+        .detail-section h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: var(--accent-color);
+        }
+
+        .detail-section p {
+            margin-bottom: 10px;
+            line-height: 1.6;
+        }
+
+        @media screen and (max-width: 768px) {
+            .timeline::after {
+                left: 31px;
+            }
+
+            .timeline-item {
+                width: 100%;
+                padding-left: 70px;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(odd) {
+                left: 0;
+                padding-right: 25px;
+            }
+
+            .timeline-item:nth-child(even) {
+                left: 0;
+                padding-left: 70px;
+            }
+
+            .timeline-item::after {
+                left: 21px;
+            }
+
+            .timeline-item:nth-child(odd)::after {
+                right: auto;
+                left: 21px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>LLM Research Timeline</h1>
+            <p class="subtitle">Key advancements in large language model context windows and retrieval capabilities (2023-2025)</p>
+            <div class="controls">
+                <button class="theme-toggle" id="theme-toggle">
+                    <i class="fas fa-moon"></i>
+                    <span>Toggle Dark Mode</span>
+                </button>
+            </div>
+        </header>
+
+        <div class="timeline">
+            <!-- Timeline items will be inserted here -->
+        </div>
+    </div>
+
+    <div class="timeline-detail" id="detail-modal">
+        <div class="detail-card">
+            <button class="close-btn" id="close-detail">
+                <i class="fas fa-times"></i>
+            </button>
+            <h2 class="detail-title"></h2>
+            <p class="detail-date"></p>
+            <div class="detail-section">
+                <h3>Context</h3>
+                <p id="context-content"></p>
+            </div>
+            <div class="detail-section">
+                <h3>Models</h3>
+                <p id="models-content"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const timelineData = [
+            {
+                date: "Nov 2023",
+                title: "Lost in the Middle",
+                authors: "Liu et al.",
+                context: "Tested LLMs with 4K–16K token inputs; found models focus on the beginning/end of context and often miss information in the middle. Simply increasing context length didn't fix this bias.",
+                models: "Analyzed GPT-3.5-Turbo (4K vs 16K) and other long-context variants. All showed a U-shaped performance curve, revealing primacy/recency effects even in models designed for longer context."
+            },
+            {
+                date: "Oct 2024",
+                title: "Infinite Retrieval",
+                authors: "Ye et al.",
+                context: "Introduced InfiniRetri, enabling LLMs to handle >1M token inputs by using their own attention as a retrieval mechanism. Demonstrated 100% accuracy on a 1M-token \"needle in haystack\" test with a model originally limited to 32K.",
+                models: "Used Qwen2.5 (0.5B params) and Mistral-7B with 32K context, extending them to read 1M+ tokens with no retraining. InfiniRetri worked across LLaMA-3, Qwen, Mistral, showing it's model-agnostic and dramatically improves long-context retrieval."
+            },
+            {
+                date: "Dec 2024",
+                title: "Refusal Direction",
+                authors: "Arditi et al.",
+                context: "Focused on safety behavior rather than long text. Used standard chat context lengths (few thousand tokens) – context size not central here, as harmful prompts are short.",
+                models: "Analyzed 13 chat-tuned LLMs (e.g. LLaMA-2 7B–70B, LLaMA-3 8B/70B, Qwen 1.8B–72B). Found a single latent vector in each model's residual stream controls refusal: removing it stops refusals, adding it forces refusals. Demonstrated a general method to \"white-box jailbreak\" models by zeroing out this refusal direction."
+            },
+            {
+                date: "Feb 2025",
+                title: "Don't Do RAG",
+                authors: "Chan et al.",
+                context: "Capitalized on LLMs with 32K–64K token windows. Proposed Cache-Augmented Generation: preload all relevant docs into the prompt (cache) to answer queries without live retrieval. Long context eliminates retrieval latency and errors, working best when the knowledge fit entirely in context.",
+                models: "Referenced LLaMA-3.1 (8B/70B with up to 64K context), GPT-4 (32K), Claude (100K). Showed that a long-context LLM (e.g. LLaMA 70B with 64K) can match or beat a traditional RAG system on certain QA benchmarks, given the model sees all needed info in its prompt."
+            },
+            {
+                date: "Feb 2025",
+                title: "ICR² Benchmark",
+                authors: "Qiu et al.",
+                context: "Evaluated LLMs on multi-document tasks with very long inputs (~32K–128K tokens). Introduced confounding (irrelevant but similar) passages to test in-context retrieval abilities. Found that long-context models still struggle without assistance – performance dips if irrelevant info is present.",
+                models: "Tested GPT-4-Turbo, Mistral-7B (32K context), LLaMA-3 8B, Qwen-2 (7B), and Phi-3 7B (128K context). After fine-tuning (e.g. a retrieve-then-generate training), a Mistral-7B-32K model gained +15% and even outperformed GPT-4-Turbo on the benchmark. Shows small, tuned models can excel in long-context reasoning."
+            },
+            {
+                date: "Feb 2025",
+                title: "Prompted RAG",
+                authors: "Park et al.",
+                context: "Tackled extremely long inputs (up to 100K tokens). Showed that simply having a 100K context isn't enough for multi-hop QA – models need guidance. Proposed a single-prompt strategy where the model tags relevant info and then reasons step-by-step, mimicking a retrieve-and-read process within the prompt. This significantly improved accuracy on tasks with massive distractor text (BABILong benchmark).",
+                models: "Used a proxy \"GPT-4-mini\" (simulated 128K context model) and LLaMA-3.1-8B (32K). Across 16K, 32K, 64K contexts, their method outperformed both a no-retrieval baseline and a traditional RAG pipeline. Indicates that even with GPT-4 or Claude-level models, proper prompt engineering (in-context retrieval + chain-of-thought) is key to leveraging very long contexts."
+            }
+        ];
+
+        // Populate the timeline
+        const timelineElement = document.querySelector('.timeline');
+        
+        timelineData.forEach((item, index) => {
+            const timelineItem = document.createElement('div');
+            timelineItem.className = 'timeline-item';
+            timelineItem.innerHTML = `
+                <div class="timeline-content" data-index="${index}">
+                    <div class="timeline-date">${item.date}</div>
+                    <div class="timeline-title">${item.title}</div>
+                    <div class="timeline-authors">${item.authors}</div>
+                </div>
+            `;
+            timelineElement.appendChild(timelineItem);
+        });
+
+        // Handle modal opening/closing
+        const timelineContents = document.querySelectorAll('.timeline-content');
+        const detailModal = document.getElementById('detail-modal');
+        const closeButton = document.getElementById('close-detail');
+        const detailTitle = document.querySelector('.detail-title');
+        const detailDate = document.querySelector('.detail-date');
+        const contextContent = document.getElementById('context-content');
+        const modelsContent = document.getElementById('models-content');
+
+        timelineContents.forEach(item => {
+            item.addEventListener('click', () => {
+                const index = parseInt(item.getAttribute('data-index'));
+                const data = timelineData[index];
+                
+                detailTitle.textContent = `${data.title} (${data.authors})`;
+                detailDate.textContent = data.date;
+                contextContent.textContent = data.context;
+                modelsContent.textContent = data.models;
+                
+                detailModal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            });
+        });
+
+        closeButton.addEventListener('click', () => {
+            detailModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        });
+
+        detailModal.addEventListener('click', (e) => {
+            if (e.target === detailModal) {
+                detailModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const toggleIcon = themeToggle.querySelector('i');
+        const toggleText = themeToggle.querySelector('span');
+        
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.setAttribute('data-theme', 'dark');
+            toggleIcon.classList.replace('fa-moon', 'fa-sun');
+            toggleText.textContent = 'Toggle Light Mode';
+        }
+
+        themeToggle.addEventListener('click', () => {
+            // Check current theme
+            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            // Update theme
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            
+            // Update button icon and text
+            if (newTheme === 'dark') {
+                toggleIcon.classList.replace('fa-moon', 'fa-sun');
+                toggleText.textContent = 'Toggle Light Mode';
+            } else {
+                toggleIcon.classList.replace('fa-sun', 'fa-moon');
+                toggleText.textContent = 'Toggle Dark Mode';
+            }
+        });
+
+        // Handle keyboard events
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && detailModal.classList.contains('active')) {
+                detailModal.classList.remove('active');
+                document.body.style.overflow = 'auto';
+            }
+        });
+    </script>
+</body>
+</html>
