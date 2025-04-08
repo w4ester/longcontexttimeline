@@ -526,11 +526,19 @@
             },
             {
                 date: "Mar 2025",
-                title: "Claude 3.7 Sonnet",
+                title: "Claude 3.7 Sonnet vs Gemini 2.5 Pro",
                 authors: "Anthropic",
                 context: "Released with up to 200K token context window. Introduced 'extended thinking mode' to improve reasoning quality within the large context window, allowing Claude to better process and reason over large amounts of information.",
                 models: "Achieved 70.3% on SWE-Bench Verified in extended thinking mode. Particularly excelled in coding tasks and complex problem-solving requiring deep reasoning over extensive context. Demonstrated the power of specialized inference techniques for improving model performance even without expanding to the million-token range.",
                 paperUrl: "https://blog.getbind.co/2025/03/26/gemini-2-5-pro-vs-claude-3-7-sonnet-vs-deepseek-r1-which-model-is-the-best-for-coding/"
+            },
+            {
+                date: "Apr 2025",
+                title: "LLaMA-4",
+                authors: "Meta AI",
+                context: "Released with millions in tokens long-context window. A new attention mechanism that allows the model to efficiently process and reason over extremely long contexts.",
+                models: "Soft attention is a mechanism for LLMs to locate relevant parts within a given context. However, individual attention weights are determined by the similarity of only a single query and key token vector. This “single token attention” bottlenecks the amount of information used in distinguishing a relevant part from the rest of the context. To address this issue, we propose a new attention method, Multi-Token Attention (MTA), which allows LLMs to condition their attention weights on multiple query and key vectors simultaneously. This is achieved by applying convolution operations over queries, keys and heads, allowing nearby queries and keys to affect each other’s attention weights for more precise attention.",
+                paperUrl: "https://scontent-iad3-1.xx.fbcdn.net/v/t39.2365-6/488613880_2364644853934490_6782847731598760350_n.pdf?_nc_cat=107&ccb=1-7&_nc_sid=3c67a6&_nc_ohc=zfF2K6J-wFoQ7kNvwGrBRCO&_nc_oc=Adl_N0FaqK61xQfLhsDmzEy91mhnFxXgtG4sS8hJmNsOOLFspE-gqfg-aT32NMCg6Bc&_nc_zt=14&_nc_ht=scontent-iad3-1.xx&_nc_gid=IWVmJKc98blt0VVaozV-wg&oh=00_AfGuFKtXrNGjaAMW4K6aeD9dR3Yfi3LgqJ7rbDh621bAHA&oe=67FB1726"
             }
 
 
