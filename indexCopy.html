@@ -308,65 +308,6 @@
                 left: 21px;
             }
         }
-        
-        .resources {
-          margin-top: 50px;
-          padding: 30px;
-          background-color: var(--card-background);
-          border-radius: 10px;
-          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        }
-
-        .resources h3 {
-          font-size: 1.8rem;
-          color: var(--primary-color);
-          margin-bottom: 20px;
-          text-align: center;
-        }
-
-        .resources h4 {
-          font-size: 1.3rem;
-          color: var(--accent-color);
-          margin-top: 25px;
-          margin-bottom: 15px;
-          border-bottom: 2px solid var(--border-color);
-          padding-bottom: 8px;
-        }
-
-        .resources ul {
-          list-style: none;
-          padding-left: 0;
-        }
-
-        .resources li {
-          margin-bottom: 12px;
-          padding-left: 25px;
-          position: relative;
-        }
-
-        .resources li:before {
-          content: "•";
-          position: absolute;
-          left: 8px;
-          color: var(--accent-color);
-        }
-
-        .resources a {
-          color: var(--primary-color);
-          text-decoration: none;
-          transition: all 0.2s ease;
-        }
-
-        .resources a:hover {
-          text-decoration: underline;
-        }
-
-        .category {
-          font-weight: bold;
-          margin-top: 15px;
-          display: block;
-          color: var(--secondary-color);
-        }
     </style>
 </head>
 <body class="light-theme">
@@ -384,33 +325,6 @@
 
         <div class="timeline">
             <!-- Timeline items will be inserted here -->
-        </div>
-        
-        <div class="resources">
-          <h3>Resources & Tools</h3>
-          
-          <h4>Analysis & Benchmarking</h4>
-          <ul>
-            <li><a href="https://artificialanalysis.ai/" target="_blank">Artificial Analysis</a> - Independent LLM benchmarking and analysis.</li>
-            <li><a href="https://artificialanalysis.ai/methodology" target="_blank">Artificial Analysis Methodology</a> - How AA conducts evaluations.</li>
-            <li><a href="https://lmarena.ai/?leaderboard" target="_blank">LM Arena</a> - Crowdsourced LLM chat leaderboard (Elo-based).</li>
-          </ul>
-          
-          <h4>Developer Tools & Frameworks</h4>
-          <ul>
-            <li><a href="https://aider.chat/docs/leaderboards/" target="_blank">Aider</a> - AI pair programmer for the terminal.</li>
-            <li><a href="https://github.com/menloresearch/jan" target="_blank">Jan</a> - Desktop application for local LLM execution.</li>
-            <li><a href="https://github.com/open-webui/open-webui" target="_blank">Open WebUI</a> - Web interface for local LLMs (e.g., Ollama).</li>
-            <li><a href="https://github.com/cline/cline" target="_blank">Cline</a> - Minimalist CLI for local LLMs.</li>
-            <li><a href="https://github.com/pydantic/pydantic-ai" target="_blank">Pydantic AI</a> - Integrates Pydantic validation with LLM interactions.</li>
-            <li><a href="https://github.com/ollama/ollama" target="_blank">Ollama</a> - Tool for running open-source LLMs locally.</li>
-            <li><a href="https://github.com/unslothai/unsloth" target="_blank">Unsloth</a> - Library for faster, memory-efficient LLM fine-tuning.</li>
-          </ul>
-          
-          <h4>Protocols</h4>
-          <ul>
-            <li><a href="https://github.com/modelcontextprotocol" target="_blank">Model Context Protocol</a> - Initiative for standardizing context passing to LLMs.</li>
-          </ul>
         </div>
     </div>
 
@@ -468,14 +382,6 @@
                 paperUrl: "https://arxiv.org/abs/2501.18795"
             },
             {
-                date: "Jan 2025",
-                title: "Scalable-Softmax (SSMax)",
-                authors: "Carter et al.",
-                context: "Addressed 'attention fading' in long contexts by modifying how attention scores are computed. Solved a key problem where standard Softmax attention flattens as context size grows, reducing a model's ability to prioritize key information.",
-                models: "Demonstrated seamless integration into existing Transformer architectures, either during or after pretraining. Showed significant improvements in model performance for long contexts, better key information retrieval, and enhanced length generalization across multiple model architectures.",
-                paperUrl: "https://arxiv.org/abs/2501.19399"
-            },
-            {
                 date: "Feb 2025",
                 title: "Don't Do RAG",
                 authors: "Chan et al.",
@@ -498,30 +404,6 @@
                 context: "Tackled extremely long inputs (up to 100K tokens). Showed that simply having a 100K context isn't enough for multi-hop QA – models need guidance. Proposed a single-prompt strategy where the model tags relevant info and then reasons step-by-step, mimicking a retrieve-and-read process within the prompt. This significantly improved accuracy on tasks with massive distractor text (BABILong benchmark).",
                 models: "Used a proxy \"GPT-4-mini\" (simulated 128K context model) and LLaMA-3.1-8B (32K). Across 16K, 32K, 64K contexts, their method outperformed both a no-retrieval baseline and a traditional RAG pipeline. Indicates that even with GPT-4 or Claude-level models, proper prompt engineering (in-context retrieval + chain-of-thought) is key to leveraging very long contexts.",
                 paperUrl: "#"
-            },
-            {
-                date: "Mar 2025",
-                title: "Gemini 2.5 Pro",
-                authors: "Google DeepMind",
-                context: "Released with a groundbreaking 1 million token context window (with plans to reach 2 million tokens). Designed with sophisticated attention mechanisms specifically optimized for extremely long contexts.",
-                models: "Achieved 91.5% on the MRCR (Multi-Round Coreference Resolution) benchmark at 128K context length, significantly outperforming competitors including GPT-4.5 which scored 48.8%. Maintained exceptionally high performance even at the extreme end of its context window.",
-                paperUrl: "https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/"
-            },
-            {
-                date: "Mar 2025",
-                title: "Claude 3.7 Sonnet",
-                authors: "Anthropic",
-                context: "Released with up to 200K token context window. Introduced 'extended thinking mode' to improve reasoning quality within the large context window, allowing Claude to better process and reason over large amounts of information.",
-                models: "Achieved 70.3% on SWE-Bench Verified in extended thinking mode. Particularly excelled in coding tasks and complex problem-solving requiring deep reasoning over extensive context. Demonstrated the power of specialized inference techniques for improving model performance even without expanding to the million-token range.",
-                paperUrl: "https://blog.getbind.co/2025/03/26/gemini-2-5-pro-vs-claude-3-7-sonnet-vs-deepseek-r1-which-model-is-the-best-for-coding/"
-            },
-            {
-                date: "Mar 2025",
-                title: "DeepSeek R1",
-                authors: "DeepSeek AI",
-                context: "Released with a 128K token context window. Utilized an innovative Mixture-of-Experts (MoE) architecture that activates only relevant parameters when processing long contexts, making it particularly efficient.",
-                models: "Demonstrated efficient technical performance for coding and mathematical tasks requiring long context. Its sparse parameter activation approach provided an alternative to the attention-optimization approaches used by competitors, showing multiple architectural paths to improving long-context performance.",
-                paperUrl: "https://arxiv.org/html/2501.12948v1"
             }
         ];
 
