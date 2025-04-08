@@ -374,6 +374,14 @@
                 paperUrl: "https://arxiv.org/abs/2406.11717"
             },
             {
+                date: "Jan 2025",
+                title: "RoPE to NoPE and Back Again",
+                authors: "Yang et al.",
+                context: "Analyzed weaknesses in RoPE (Rotary Position Embedding) for extended context lengths. Compared RoPE, NoPE (No Positional Embedding), and QK-Norm attention mechanisms, finding unique strengths in each for long-context modeling.",
+                models: "Proposed a novel hybrid attention architecture combining different embedding approaches. Pretrained for 5 trillion tokens. Outperformed RoPE-based models on long-context tasks while maintaining strong performance on shorter context benchmarks.",
+                paperUrl: "https://arxiv.org/abs/2501.18795"
+            },
+            {
                 date: "Feb 2025",
                 title: "Don't Do RAG",
                 authors: "Chan et al.",
@@ -387,7 +395,7 @@
                 authors: "Qiu et al.",
                 context: "Evaluated LLMs on multi-document tasks with very long inputs (~32K–128K tokens). Introduced confounding (irrelevant but similar) passages to test in-context retrieval abilities. Found that long-context models still struggle without assistance – performance dips if irrelevant info is present.",
                 models: "Tested GPT-4-Turbo, Mistral-7B (32K context), LLaMA-3 8B, Qwen-2 (7B), and Phi-3 7B (128K context). After fine-tuning (e.g. a retrieve-then-generate training), a Mistral-7B-32K model gained +15% and even outperformed GPT-4-Turbo on the benchmark. Shows small, tuned models can excel in long-context reasoning.",
-                paperUrl: "#"
+                paperUrl: "https://arxiv.org/abs/2501.08248"
             },
             {
                 date: "Feb 2025",
