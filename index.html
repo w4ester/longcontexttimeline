@@ -6,7 +6,7 @@
     <title>LLM Research Timeline (2023-2025)</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        :root {
+        body.light-theme {
             --primary-color: #2563eb;
             --secondary-color: #4b5563;
             --accent-color: #10b981;
@@ -17,20 +17,19 @@
             --hover-color: #f3f4f6;
             --timeline-width: 4px;
         }
-
-        @media (prefers-color-scheme: dark) {
-            :root {
-                --primary-color: #3b82f6;
-                --secondary-color: #9ca3af;
-                --accent-color: #10b981;
-                --background-color: #1f2937;
-                --card-background: #374151;
-                --text-color: #f3f4f6;
-                --border-color: #4b5563;
-                --hover-color: #2d3748;
-            }
+        
+        body.dark-theme {
+            --primary-color: #3b82f6;
+            --secondary-color: #9ca3af;
+            --accent-color: #10b981;
+            --background-color: #1f2937;
+            --card-background: #374151;
+            --text-color: #f3f4f6;
+            --border-color: #4b5563;
+            --hover-color: #2d3748;
+            --timeline-width: 4px;
         }
-
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
             line-height: 1.6;
@@ -232,6 +231,32 @@
             margin-bottom: 5px;
         }
 
+        .detail-link {
+            margin-bottom: 15px;
+        }
+        
+        .paper-link {
+            display: inline-block;
+            background-color: var(--primary-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: background-color 0.2s ease;
+        }
+        
+        .paper-link:hover {
+            background-color: #1d4ed8;
+            text-decoration: none;
+            color: white;
+        }
+        
+        .paper-link i {
+            margin-left: 5px;
+            font-size: 0.9rem;
+        }
+        
         .detail-date {
             font-size: 1rem;
             color: var(--secondary-color);
@@ -285,7 +310,7 @@
         }
     </style>
 </head>
-<body>
+<body class="light-theme">
     <div class="container">
         <header>
             <h1>LLM Research Timeline</h1>
@@ -310,6 +335,7 @@
             </button>
             <h2 class="detail-title"></h2>
             <p class="detail-date"></p>
+            <p class="detail-link"><a href="#" target="_blank" class="paper-link">View Paper <i class="fas fa-external-link-alt"></i></a></p>
             <div class="detail-section">
                 <h3>Context</h3>
                 <p id="context-content"></p>
@@ -328,42 +354,48 @@
                 title: "Lost in the Middle",
                 authors: "Liu et al.",
                 context: "Tested LLMs with 4K–16K token inputs; found models focus on the beginning/end of context and often miss information in the middle. Simply increasing context length didn't fix this bias.",
-                models: "Analyzed GPT-3.5-Turbo (4K vs 16K) and other long-context variants. All showed a U-shaped performance curve, revealing primacy/recency effects even in models designed for longer context."
+                models: "Analyzed GPT-3.5-Turbo (4K vs 16K) and other long-context variants. All showed a U-shaped performance curve, revealing primacy/recency effects even in models designed for longer context.",
+                paperUrl: "https://arxiv.org/abs/2307.03172"
             },
             {
                 date: "Oct 2024",
                 title: "Infinite Retrieval",
                 authors: "Ye et al.",
                 context: "Introduced InfiniRetri, enabling LLMs to handle >1M token inputs by using their own attention as a retrieval mechanism. Demonstrated 100% accuracy on a 1M-token \"needle in haystack\" test with a model originally limited to 32K.",
-                models: "Used Qwen2.5 (0.5B params) and Mistral-7B with 32K context, extending them to read 1M+ tokens with no retraining. InfiniRetri worked across LLaMA-3, Qwen, Mistral, showing it's model-agnostic and dramatically improves long-context retrieval."
+                models: "Used Qwen2.5 (0.5B params) and Mistral-7B with 32K context, extending them to read 1M+ tokens with no retraining. InfiniRetri worked across LLaMA-3, Qwen, Mistral, showing it's model-agnostic and dramatically improves long-context retrieval.",
+                paperUrl: "https://arxiv.org/abs/2502.12962"
             },
             {
                 date: "Dec 2024",
                 title: "Refusal Direction",
                 authors: "Arditi et al.",
                 context: "Focused on safety behavior rather than long text. Used standard chat context lengths (few thousand tokens) – context size not central here, as harmful prompts are short.",
-                models: "Analyzed 13 chat-tuned LLMs (e.g. LLaMA-2 7B–70B, LLaMA-3 8B/70B, Qwen 1.8B–72B). Found a single latent vector in each model's residual stream controls refusal: removing it stops refusals, adding it forces refusals. Demonstrated a general method to \"white-box jailbreak\" models by zeroing out this refusal direction."
+                models: "Analyzed 13 chat-tuned LLMs (e.g. LLaMA-2 7B–70B, LLaMA-3 8B/70B, Qwen 1.8B–72B). Found a single latent vector in each model's residual stream controls refusal: removing it stops refusals, adding it forces refusals. Demonstrated a general method to \"white-box jailbreak\" models by zeroing out this refusal direction.",
+                paperUrl: "https://arxiv.org/abs/2406.11717"
             },
             {
                 date: "Feb 2025",
                 title: "Don't Do RAG",
                 authors: "Chan et al.",
                 context: "Capitalized on LLMs with 32K–64K token windows. Proposed Cache-Augmented Generation: preload all relevant docs into the prompt (cache) to answer queries without live retrieval. Long context eliminates retrieval latency and errors, working best when the knowledge fit entirely in context.",
-                models: "Referenced LLaMA-3.1 (8B/70B with up to 64K context), GPT-4 (32K), Claude (100K). Showed that a long-context LLM (e.g. LLaMA 70B with 64K) can match or beat a traditional RAG system on certain QA benchmarks, given the model sees all needed info in its prompt."
+                models: "Referenced LLaMA-3.1 (8B/70B with up to 64K context), GPT-4 (32K), Claude (100K). Showed that a long-context LLM (e.g. LLaMA 70B with 64K) can match or beat a traditional RAG system on certain QA benchmarks, given the model sees all needed info in its prompt.",
+                paperUrl: "https://arxiv.org/abs/2412.15605"
             },
             {
                 date: "Feb 2025",
                 title: "ICR² Benchmark",
                 authors: "Qiu et al.",
                 context: "Evaluated LLMs on multi-document tasks with very long inputs (~32K–128K tokens). Introduced confounding (irrelevant but similar) passages to test in-context retrieval abilities. Found that long-context models still struggle without assistance – performance dips if irrelevant info is present.",
-                models: "Tested GPT-4-Turbo, Mistral-7B (32K context), LLaMA-3 8B, Qwen-2 (7B), and Phi-3 7B (128K context). After fine-tuning (e.g. a retrieve-then-generate training), a Mistral-7B-32K model gained +15% and even outperformed GPT-4-Turbo on the benchmark. Shows small, tuned models can excel in long-context reasoning."
+                models: "Tested GPT-4-Turbo, Mistral-7B (32K context), LLaMA-3 8B, Qwen-2 (7B), and Phi-3 7B (128K context). After fine-tuning (e.g. a retrieve-then-generate training), a Mistral-7B-32K model gained +15% and even outperformed GPT-4-Turbo on the benchmark. Shows small, tuned models can excel in long-context reasoning.",
+                paperUrl: "#"
             },
             {
                 date: "Feb 2025",
                 title: "Prompted RAG",
                 authors: "Park et al.",
                 context: "Tackled extremely long inputs (up to 100K tokens). Showed that simply having a 100K context isn't enough for multi-hop QA – models need guidance. Proposed a single-prompt strategy where the model tags relevant info and then reasons step-by-step, mimicking a retrieve-and-read process within the prompt. This significantly improved accuracy on tasks with massive distractor text (BABILong benchmark).",
-                models: "Used a proxy \"GPT-4-mini\" (simulated 128K context model) and LLaMA-3.1-8B (32K). Across 16K, 32K, 64K contexts, their method outperformed both a no-retrieval baseline and a traditional RAG pipeline. Indicates that even with GPT-4 or Claude-level models, proper prompt engineering (in-context retrieval + chain-of-thought) is key to leveraging very long contexts."
+                models: "Used a proxy \"GPT-4-mini\" (simulated 128K context model) and LLaMA-3.1-8B (32K). Across 16K, 32K, 64K contexts, their method outperformed both a no-retrieval baseline and a traditional RAG pipeline. Indicates that even with GPT-4 or Claude-level models, proper prompt engineering (in-context retrieval + chain-of-thought) is key to leveraging very long contexts.",
+                paperUrl: "#"
             }
         ];
 
@@ -391,6 +423,7 @@
         const detailDate = document.querySelector('.detail-date');
         const contextContent = document.getElementById('context-content');
         const modelsContent = document.getElementById('models-content');
+        const paperLink = document.querySelector('.paper-link');
 
         timelineContents.forEach(item => {
             item.addEventListener('click', () => {
@@ -401,6 +434,14 @@
                 detailDate.textContent = data.date;
                 contextContent.textContent = data.context;
                 modelsContent.textContent = data.models;
+                
+                // Update paper link
+                if (data.paperUrl && data.paperUrl !== '#') {
+                    paperLink.href = data.paperUrl;
+                    paperLink.parentElement.style.display = 'block';
+                } else {
+                    paperLink.parentElement.style.display = 'none';
+                }
                 
                 detailModal.classList.add('active');
                 document.body.style.overflow = 'hidden';
@@ -424,30 +465,44 @@
         const toggleIcon = themeToggle.querySelector('i');
         const toggleText = themeToggle.querySelector('span');
         
-        // Check for saved theme preference or respect OS preference
-        const savedTheme = localStorage.getItem('theme');
-        if (savedTheme === 'dark' || (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-            toggleIcon.classList.replace('fa-moon', 'fa-sun');
-            toggleText.textContent = 'Toggle Light Mode';
-        }
-
-        themeToggle.addEventListener('click', () => {
-            // Check current theme
-            const currentTheme = document.documentElement.getAttribute('data-theme') || 'light';
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            
-            // Update theme
-            document.documentElement.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
+        // Apply dark/light mode styles
+        const applyTheme = (theme) => {
+            document.body.className = theme + '-theme';
             
             // Update button icon and text
-            if (newTheme === 'dark') {
+            if (theme === 'dark') {
                 toggleIcon.classList.replace('fa-moon', 'fa-sun');
                 toggleText.textContent = 'Toggle Light Mode';
             } else {
                 toggleIcon.classList.replace('fa-sun', 'fa-moon');
                 toggleText.textContent = 'Toggle Dark Mode';
+            }
+        };
+        
+        // Check for saved theme preference or respect OS preference
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const initialTheme = savedTheme || (prefersDark ? 'dark' : 'light');
+        
+        // Apply the initial theme
+        applyTheme(initialTheme);
+        
+        // Handle theme toggle click
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = document.body.classList.contains('dark-theme') ? 'dark' : 'light';
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            
+            // Save theme preference
+            localStorage.setItem('theme', newTheme);
+            
+            // Apply the new theme
+            applyTheme(newTheme);
+        });
+        
+        // Listen for system theme changes
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+            if (!localStorage.getItem('theme')) {
+                applyTheme(e.matches ? 'dark' : 'light');
             }
         });
 
